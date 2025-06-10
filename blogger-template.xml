@@ -1,0 +1,808 @@
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true' b:templateUrl='BeritaKu.xml' b:templateVersion='1.3.0' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale'>
+<head>
+<meta charset='utf-8'/>
+<meta content='width=device-width,initial-scale=1,minimum-scale=1' name='viewport'/>
+<title><data:view.title.escaped/></title>
+<b:skin><![CDATA[
+/* CSS Variables for Design System */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --primary: 222.2 47.4% 11.2%;
+  --primary-foreground: 210 40% 98%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --border: 214.3 31.8% 91.4%;
+}
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  line-height: 1.6;
+  color: hsl(var(--foreground));
+  background-color: hsl(var(--background));
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Header Styles */
+.header {
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  border-bottom: 1px solid hsl(var(--border));
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: hsl(var(--primary));
+  text-decoration: none;
+}
+
+.search-box {
+  position: relative;
+  display: none;
+}
+
+.search-input {
+  padding: 0.5rem 0.75rem 0.5rem 2.5rem;
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.375rem;
+  width: 16rem;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1rem;
+  height: 1rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.header-nav {
+  padding: 1rem 0;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  overflow-x: auto;
+}
+
+.nav-item a {
+  text-decoration: none;
+  font-weight: 500;
+  color: hsl(var(--foreground));
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.nav-item a:hover {
+  color: hsl(var(--primary));
+}
+
+/* Hero Section */
+.hero-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.featured-article {
+  position: relative;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.featured-image {
+  width: 100%;
+  height: 25rem;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.featured-article:hover .featured-image {
+  transform: scale(1.05);
+}
+
+.featured-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.2), transparent);
+}
+
+.featured-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  color: white;
+}
+
+.featured-category {
+  display: inline-block;
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.featured-title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+
+.featured-summary {
+  color: #e5e7eb;
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.featured-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: #d1d5db;
+}
+
+/* Side News */
+.side-news {
+  display: none;
+}
+
+.side-news h2 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.side-article {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.side-image {
+  width: 5rem;
+  height: 4rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+  flex-shrink: 0;
+}
+
+.side-content {
+  flex: 1;
+}
+
+.side-category {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: hsl(var(--primary));
+  margin-bottom: 0.25rem;
+}
+
+.side-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.side-time {
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+}
+
+/* Main Content Grid */
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.news-section h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.view-all {
+  font-size: 0.875rem;
+  color: hsl(var(--primary));
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+/* Article Card */
+.article-card {
+  background: hsl(var(--card));
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.3s;
+}
+
+.article-card:hover {
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.article-image {
+  width: 100%;
+  height: 12rem;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.article-card:hover .article-image {
+  transform: scale(1.05);
+}
+
+.article-content {
+  padding: 1rem;
+}
+
+.article-category {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.article-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.article-summary {
+  color: hsl(var(--muted-foreground));
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.article-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: hsl(var(--muted-foreground));
+}
+
+.meta-left {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+}
+
+.sidebar-widget {
+  background: hsl(var(--card));
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  margin-bottom: 1.5rem;
+}
+
+.widget-title {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.widget-title svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: hsl(var(--primary));
+}
+
+.trending-list {
+  list-style: none;
+}
+
+.trending-item {
+  margin-bottom: 0.5rem;
+}
+
+.trending-link {
+  color: hsl(var(--muted-foreground));
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s;
+}
+
+.trending-link:hover {
+  color: hsl(var(--primary));
+}
+
+/* Footer */
+.footer {
+  background: hsl(var(--muted));
+  border-top: 1px solid hsl(var(--border));
+  margin-top: 3rem;
+  padding: 2rem 0;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.footer-section h3 {
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.footer-links {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  color: hsl(var(--muted-foreground));
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: hsl(var(--primary));
+}
+
+.social-links {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.social-link {
+  color: hsl(var(--muted-foreground));
+  transition: color 0.2s;
+}
+
+.social-link:hover {
+  color: hsl(var(--primary));
+}
+
+.footer-bottom {
+  border-top: 1px solid hsl(var(--border));
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  text-align: center;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.875rem;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .search-box {
+    display: block;
+  }
+  
+  .hero-section {
+    grid-template-columns: 2fr 1fr;
+  }
+  
+  .side-news {
+    display: block;
+  }
+  
+  .news-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .main-content {
+    grid-template-columns: 2fr 1fr;
+  }
+  
+  .sidebar {
+    display: block;
+  }
+  
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer-content {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Blogger Specific Overrides */
+.blog-posts {
+  display: none;
+}
+
+.post {
+  margin-bottom: 2rem;
+}
+
+.post-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.post-body {
+  line-height: 1.7;
+}
+
+.post-footer {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid hsl(var(--border));
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+}
+]]></b:skin>
+
+<b:template-skin>
+<b:variable default='$(body.font)' name='body.font' type='font' value='normal normal 400 14px Roboto, sans-serif'/>
+<b:variable default='$(body.background.color)' name='body.background.color' type='color' value='#ffffff'/>
+</b:template-skin>
+</head>
+
+<body>
+<div class='header'>
+  <div class='container'>
+    <div class='header-top'>
+      <a class='logo' expr:href='data:blog.homepageUrl'>BeritaKu</a>
+      <div class='search-box'>
+        <svg class='search-icon' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+          <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m21 21-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'/>
+        </svg>
+        <input class='search-input' placeholder='Cari berita...' type='text'/>
+      </div>
+    </div>
+    <nav class='header-nav'>
+      <ul class='nav-menu'>
+        <li class='nav-item'><a href='/'>Beranda</a></li>
+        <li class='nav-item'><a href='/search/label/Politik'>Politik</a></li>
+        <li class='nav-item'><a href='/search/label/Hukum'>Hukum</a></li>
+        <li class='nav-item'><a href='/search/label/Ekonomi'>Ekonomi</a></li>
+        <li class='nav-item'><a href='/search/label/Olahraga'>Olahraga</a></li>
+        <li class='nav-item'><a href='/search/label/Teknologi'>Teknologi</a></li>
+        <li class='nav-item'><a href='/search/label/Lifestyle'>Lifestyle</a></li>
+        <li class='nav-item'><a href='/search/label/Hiburan'>Hiburan</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<main class='container'>
+  <!-- Hero Section -->
+  <section class='hero-section'>
+    <div class='featured-article'>
+      <img alt='Featured News' class='featured-image' src='https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&amp;h=400&amp;fit=crop'/>
+      <div class='featured-overlay'></div>
+      <div class='featured-content'>
+        <span class='featured-category'>Teknologi</span>
+        <h1 class='featured-title'>Pemerintah Umumkan Kebijakan Baru Untuk Mendorong Ekonomi Digital Indonesia</h1>
+        <p class='featured-summary'>Menteri Komunikasi dan Informatika mengumumkan serangkaian kebijakan baru yang bertujuan untuk mempercepat transformasi digital di Indonesia dan meningkatkan daya saing ekonomi digital.</p>
+        <div class='featured-meta'>
+          <span>2 jam yang lalu</span>
+          <span>15.2K views</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class='side-news'>
+      <h2>Berita Terkini</h2>
+      <div class='side-article'>
+        <img alt='News' class='side-image' src='https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=200&amp;h=120&amp;fit=crop'/>
+        <div class='side-content'>
+          <span class='side-category'>Ekonomi</span>
+          <h3 class='side-title'>Inflasi Indonesia Turun ke Level Terendah dalam 6 Bulan Terakhir</h3>
+          <span class='side-time'>3 jam yang lalu</span>
+        </div>
+      </div>
+      <div class='side-article'>
+        <img alt='News' class='side-image' src='https://images.unsplash.com/photo-1517022812141-23620dba5c23?w=200&amp;h=120&amp;fit=crop'/>
+        <div class='side-content'>
+          <span class='side-category'>Olahraga</span>
+          <h3 class='side-title'>Tim Nasional Indonesia Lolos ke Semifinal Piala Asia</h3>
+          <span class='side-time'>4 jam yang lalu</span>
+        </div>
+      </div>
+      <div class='side-article'>
+        <img alt='News' class='side-image' src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=200&amp;h=120&amp;fit=crop'/>
+        <div class='side-content'>
+          <span class='side-category'>Teknologi</span>
+          <h3 class='side-title'>Peluncuran Satelit Komunikasi Terbaru Indonesia Sukses</h3>
+          <span class='side-time'>5 jam yang lalu</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class='main-content'>
+    <section class='news-section'>
+      <h2>
+        Berita Terbaru
+        <a class='view-all' href='/'>Lihat Semua</a>
+      </h2>
+      <div class='news-grid'>
+        <b:section class='main' id='main' maxwidgets='6' name='Berita Utama' showaddelement='yes'>
+          <b:widget id='Blog1' locked='true' title='Posting Blog' type='Blog' version='2' visible='true'>
+            <b:widget-settings>
+              <b:widget-setting name='showDateHeader'>false</b:widget-setting>
+              <b:widget-setting name='style.textcolor'>#000000</b:widget-setting>
+              <b:widget-setting name='showShareButtons'>false</b:widget-setting>
+              <b:widget-setting name='showCommentLink'>false</b:widget-setting>
+              <b:widget-setting name='showAuthor'>false</b:widget-setting>
+              <b:widget-setting name='showLabels'>true</b:widget-setting>
+              <b:widget-setting name='showLocation'>false</b:widget-setting>
+              <b:widget-setting name='postPerPage'>6</b:widget-setting>
+              <b:widget-setting name='showTimestamp'>true</b:widget-setting>
+              <b:widget-setting name='showReactions'>false</b:widget-setting>
+              <b:widget-setting name='showEmailPost'>false</b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main' var='this'>
+              <b:loop values='data:posts' var='post'>
+                <article class='article-card'>
+                  <div style='position: relative; overflow: hidden;'>
+                    <b:if cond='data:post.featuredImage'>
+                      <img class='article-image' expr:alt='data:post.title' expr:src='data:post.featuredImage'/>
+                    <b:else/>
+                      <img class='article-image' alt='Default Image' src='https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&amp;h=250&amp;fit=crop'/>
+                    </b:if>
+                    <b:if cond='data:post.labels'>
+                      <span class='article-category'><data:post.labels.first.name/></span>
+                    </b:if>
+                  </div>
+                  <div class='article-content'>
+                    <h3 class='article-title'>
+                      <a expr:href='data:post.url' expr:title='data:post.title'><data:post.title/></a>
+                    </h3>
+                    <p class='article-summary'>
+                      <b:eval expr='data:post.body snippet {length: 120, links: false, linebreaks: false, ellipsis: true}'/>
+                    </p>
+                    <div class='article-meta'>
+                      <div class='meta-left'>
+                        <span><data:post.author.name/></span>
+                        <span><data:post.timestamp/></span>
+                      </div>
+                      <span>2.1K views</span>
+                    </div>
+                  </div>
+                </article>
+              </b:loop>
+            </b:includable>
+          </b:widget>
+        </b:section>
+      </div>
+    </section>
+
+    <aside class='sidebar'>
+      <div class='sidebar-widget'>
+        <h3 class='widget-title'>
+          <svg fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+            <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M13 7h8m0 0v8m0-8l-8 8-4-4-6 6'/>
+          </svg>
+          Topik Trending
+        </h3>
+        <ul class='trending-list'>
+          <li class='trending-item'><a class='trending-link' href='/search/label/Pemilu-2024'>#Pemilu 2024</a></li>
+          <li class='trending-item'><a class='trending-link' href='/search/label/Ekonomi-Digital'>#Ekonomi Digital</a></li>
+          <li class='trending-item'><a class='trending-link' href='/search/label/Perubahan-Iklim'>#Perubahan Iklim</a></li>
+          <li class='trending-item'><a class='trending-link' href='/search/label/Startup-Indonesia'>#Startup Indonesia</a></li>
+          <li class='trending-item'><a class='trending-link' href='/search/label/Pendidikan-Online'>#Pendidikan Online</a></li>
+        </ul>
+      </div>
+
+      <div class='sidebar-widget'>
+        <h3 class='widget-title'>
+          <svg fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+            <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'/>
+          </svg>
+          Penulis Populer
+        </h3>
+        <div style='margin-bottom: 0.75rem;'>
+          <div style='display: flex; justify-content: space-between; align-items: center;'>
+            <div>
+              <p style='font-size: 0.875rem; font-weight: 500;'>Ahmad Rizki</p>
+              <p style='font-size: 0.75rem; color: hsl(var(--muted-foreground));'>124 artikel</p>
+            </div>
+            <span style='font-size: 0.75rem; color: hsl(var(--primary)); font-weight: 500;'>2.3K</span>
+          </div>
+        </div>
+      </div>
+
+      <div class='sidebar-widget' style='background: hsl(var(--primary) / 0.05);'>
+        <h3 style='color: hsl(var(--primary)); margin-bottom: 0.5rem;'>Newsletter</h3>
+        <p style='font-size: 0.875rem; color: hsl(var(--muted-foreground)); margin-bottom: 0.75rem;'>
+          Dapatkan berita terbaru langsung di email Anda
+        </p>
+        <input placeholder='Email Anda' style='width: 100%; padding: 0.5rem 0.75rem; margin-bottom: 0.5rem; border: 1px solid hsl(var(--border)); border-radius: 0.375rem;' type='email'/>
+        <button style='width: 100%; background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); padding: 0.5rem 0.75rem; border: none; border-radius: 0.375rem; cursor: pointer;'>
+          Berlangganan
+        </button>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class='footer'>
+  <div class='container'>
+    <div class='footer-content'>
+      <div class='footer-section'>
+        <h3 style='font-size: 1.5rem; color: hsl(var(--primary)); margin-bottom: 1rem;'>BeritaKu</h3>
+        <p style='color: hsl(var(--muted-foreground)); font-size: 0.875rem; margin-bottom: 1rem;'>
+          Portal berita terpercaya yang menghadirkan informasi terkini dan akurat untuk masyarakat Indonesia.
+        </p>
+        <div class='social-links'>
+          <a class='social-link' href='#'>Facebook</a>
+          <a class='social-link' href='#'>Twitter</a>
+          <a class='social-link' href='#'>Instagram</a>
+          <a class='social-link' href='#'>YouTube</a>
+        </div>
+      </div>
+      
+      <div class='footer-section'>
+        <h4 style='font-weight: 600; margin-bottom: 0.75rem;'>Kategori</h4>
+        <ul class='footer-links'>
+          <li><a href='/search/label/Politik'>Politik</a></li>
+          <li><a href='/search/label/Ekonomi'>Ekonomi</a></li>
+          <li><a href='/search/label/Olahraga'>Olahraga</a></li>
+          <li><a href='/search/label/Teknologi'>Teknologi</a></li>
+          <li><a href='/search/label/Lifestyle'>Lifestyle</a></li>
+          <li><a href='/search/label/Hiburan'>Hiburan</a></li>
+        </ul>
+      </div>
+      
+      <div class='footer-section'>
+        <h4 style='font-weight: 600; margin-bottom: 0.75rem;'>Perusahaan</h4>
+        <ul class='footer-links'>
+          <li><a href='/p/tentang-kami.html'>Tentang Kami</a></li>
+          <li><a href='/p/redaksi.html'>Redaksi</a></li>
+          <li><a href='/p/karir.html'>Karir</a></li>
+          <li><a href='/p/kontak.html'>Kontak</a></li>
+          <li><a href='/p/kebijakan-privasi.html'>Kebijakan Privasi</a></li>
+        </ul>
+      </div>
+      
+      <div class='footer-section'>
+        <h4 style='font-weight: 600; margin-bottom: 0.75rem;'>Layanan</h4>
+        <ul class='footer-links'>
+          <li><a href='/p/newsletter.html'>Newsletter</a></li>
+          <li><a href='/feeds/posts/default'>RSS Feed</a></li>
+          <li><a href='/p/mobile-app.html'>Mobile App</a></li>
+          <li><a href='/p/api.html'>API</a></li>
+          <li><a href='/p/iklan.html'>Iklan</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class='footer-bottom'>
+      <p>© 2024 BeritaKu. Semua hak dilindungi undang-undang.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+//<![CDATA[
+// Search functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const searchInput = document.querySelector('.search-input');
+  if (searchInput) {
+    searchInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        const query = this.value.trim();
+        if (query) {
+          window.location.href = '/search?q=' + encodeURIComponent(query);
+        }
+      }
+    });
+  }
+
+  // Article hover effects
+  const articles = document.querySelectorAll('.article-card, .featured-article, .side-article');
+  articles.forEach(article => {
+    article.addEventListener('mouseenter', function() {
+      this.style.transform = 'translateY(-2px)';
+    });
+    
+    article.addEventListener('mouseleave', function() {
+      this.style.transform = 'translateY(0)';
+    });
+  });
+
+  // Newsletter subscription
+  const newsletterForm = document.querySelector('.sidebar-widget button');
+  if (newsletterForm) {
+    newsletterForm.addEventListener('click', function() {
+      const email = this.previousElementSibling.value;
+      if (email && email.includes('@')) {
+        alert('Terima kasih! Anda telah berlangganan newsletter BeritaKu.');
+        this.previousElementSibling.value = '';
+      } else {
+        alert('Mohon masukkan email yang valid.');
+      }
+    });
+  }
+});
+//]]>
+</script>
+</body>
+</html>
